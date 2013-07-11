@@ -1,4 +1,11 @@
 class ProfilesController < ApplicationController
   def show
+  	@user = User.find_by_profile_name(params[:id])  # assigns user to instance variable, search by :id
+  	if @user
+  	  @statuses = Status.all
+  	  render actions: :show
+  	else
+  	   render file: 'public/404', status: 404, formats: [:html]
+  	end
   end
 end
